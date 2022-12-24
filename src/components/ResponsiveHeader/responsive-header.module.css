@@ -1,0 +1,64 @@
+.header {
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: var(--mobile-menu-height);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0 15px;
+    background-color: var(--menu-background-color);
+}
+
+.logoBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: var(--mobile-menu-height);
+}
+
+.logoBox img {
+    height: calc(var(--mobile-menu-height) - 6px);
+}
+
+.flexLeft, .flexRight {
+    width: 120px;
+}
+
+.flexLeft{
+    justify-content: start;
+}
+
+.flexRight{
+    justify-content: end;
+}
+
+.burgerMenu {
+    position: relative;
+    box-sizing: border-box;
+    width: 36px;
+    height: 27px;
+    border: 1px solid #979797;
+}
+
+.burgerMenu span {
+    position: absolute;
+    box-sizing: border-box;
+    width: 18px;
+    border-bottom: 1px solid #979797;
+    left: 8px;
+}
+
+.burgerMenu span:nth-child(1){
+    top:7px;
+}
+
+.burgerMenu span:nth-child(2){
+    top: 12px
+}
+
+.burgerMenu span:nth-child(3){
+    top: 17px
+}

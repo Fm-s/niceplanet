@@ -1,0 +1,8 @@
+.main {
+    margin-top: calc(var(--mobile-menu-height) + 1rem);
+    max-width: calc(100vw - 2rem);
+    min-width: 360px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 200px;
+}

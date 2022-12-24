@@ -1,0 +1,62 @@
+.listContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    border-radius: 12px 12px 4px 4px;
+    font-family: 'Poppins', sans-serif;
+    gap: 0;
+    color: #F1E6E6;
+}
+
+.leftCornerListHead, .rightCornerListHead {
+    box-sizing: border-box;
+    height: 40px;
+    width: 100%;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.leftCornerListHead {
+    border-radius: 12px 0 0 0;
+}
+
+.rightCornerListHead {
+    border-radius: 0 12px 0 0;
+}
+
+.listCell {
+    text-align: center;
+    background: #9EA298;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 38px;
+    border: 1px solid #A8ACA1;
+    border-bottom: 2px solid #A8ACA1;
+    border-top: 0;
+}
+
+.listCell:last-child{
+    border-radius: 0 0 4px 0;
+}
+
+.listCell:nth-last-child(2){
+    border-radius: 0 0 0 4px;
+}
+
+.emptyList {
+    border-radius: 0 0 4px 4px;
+    grid-column: span 2;
+}
+
+.produtorListStyle{
+    grid-template-columns: 1fr 140px;
+    background-color: #A8ACA1;
+}
+
+.produtorListHeadStyle{
+    background-color: #A8ACA1;
+}
+
+.produtorCornerHead {
+    border: 1px solid #9EA298;
+}
