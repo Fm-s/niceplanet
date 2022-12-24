@@ -26,13 +26,10 @@
 
 .listCell {
     text-align: center;
-    background: #9EA298;
     box-sizing: border-box;
     width: 100%;
     min-height: 38px;
-    border: 1px solid #A8ACA1;
-    border-bottom: 2px solid #A8ACA1;
-    border-top: 0;
+    padding: 5px;
 }
 
 .listCell:last-child{
@@ -48,6 +45,7 @@
     grid-column: span 2;
 }
 
+/* ### LISTA PRODUTOR  ### */
 .produtorListStyle{
     grid-template-columns: 1fr 140px;
     background-color: #A8ACA1;
@@ -59,4 +57,102 @@
 
 .produtorCornerHead {
     border: 1px solid #9EA298;
+}
+
+.produtorListCell{
+    background: #9EA298;
+    border: 1px solid #A8ACA1;
+    border-bottom: 2px solid #A8ACA1;
+    border-top: 0;
+}
+
+/* ### LISTA PROPRIEDADE ### */
+.propriedadeListStyle{
+    grid-template-columns: 1fr 1fr;
+    background-color: #009946;
+}
+
+.propriedadeListHeadStyle{
+    background-color: #009946;
+}
+
+.propriedadeCornerHead {
+    border: 1px solid #008E41;
+}
+
+.propriedadeListCell{
+    background: #008E41;
+    border: 1px solid #009946;
+    border-bottom: 2px solid #009946;
+    border-top: 0;
+}
+
+.propriedadeListCell:nth-child(2n){
+    word-break: break-all;
+}
+
+/* ### LISTA MONITORAMENTO ### */
+.monitoramentoList{
+    font-family: 'Poppins', sans-serif;
+    border-radius: 12px 12px 4px 4px;
+    box-sizing: border-box;
+    background-color: #C02421;
+    border: 1px solid #9F1C19;
+    width: 100%;
+}
+
+.monitoramentoListHead {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #F1E6E6;
+    border: 1px solid #9F1C19;
+    border-radius: 12px 12px 0 0;
+    height: 40px;
+}
+
+.monitoramentoListEntry{
+    background-color: #9F1C19;
+    color: #F1E6E6;
+    display: flex;
+    box-sizing: border-box;
+    padding: 5px;
+    border-top: 2px solid #FF8383;
+}
+
+.labelMonitoramento{
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 0 8px;
+    height: 20px;
+    flex-grow: 0;
+}
+
+.valueMonitoramento {
+    font-size: 0.9rem;
+    border-bottom: 2px solid #C02421;
+    flex-grow: 1;
+    max-width: 12rem;
+    text-align: center;
+}
+
+.monitoramentoDescription{
+    position: relative;
+    font-size: 0.9rem;
+    text-indent: 94px;
+    color: #F1E6E6;
+    background-color: #9F1C19;
+    padding: 0 6px;
+    padding-bottom: 5px;
+}
+
+.monitoramentoDescriptionLabel{
+    font-weight: 600;
+    text-indent: 0;
+    position: absolute;
+    background-color: #9F1C19;
+    height: 20px;
+    padding: 0;
+    margin: 0;
+    top: 0px;
+    left: 8px;
 }

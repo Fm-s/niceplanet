@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './list-styles.module.css'
 
 const ListPropriedades = () => {
-    const dataArray = [['João Souza Silva Sauro Muniz','999.999.999-99'],['José Souza Silva Sauro Albuquerque','111.111.111.111-11'],['Maria Firmina Josicleide Andrade','000.000.000-00']]
+    const dataArray = [['Fazendo Grupo Terra Viva','PAkinbdgbvksjb254656263'],['Princesa do Reino','PAdqkwlehq1231nl231234123']]
     
     let mapedOutput;
     
