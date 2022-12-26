@@ -1,8 +1,8 @@
 import React from 'react'
 import styles from './list-styles.module.css'
+import PropTypes from 'prop-types';
 
-const ListProdutores = () => {
-    const dataArray = [['João Souza Silva Sauro Muniz','999.999.999-99'],['José Souza Silva Sauro Albuquerque','111.111.111.111-11'],['Maria Firmina Josicleide Andrade','000.000.000-00']]
+const ListProdutores = ({dataArray}) => {
     
     let mapedOutput;
     
@@ -12,10 +12,10 @@ const ListProdutores = () => {
         
         mapedOutput = dataArray.map(val => {
             return (
-            <>           
-                <div className={listCellStyle}>{val[0]}</div>
-                <div className={listCellStyle}>{val[1]}</div>
-            </>
+            <React.Fragment key={"produtor_"+ val.idprodutor}>
+                <div className={listCellStyle}>{val.nomeProdutor}</div>
+                <div className={listCellStyle}>{val.cpfProdutor}</div>
+            </React.Fragment>
             )
         })
     }else {
@@ -23,11 +23,22 @@ const ListProdutores = () => {
     }
     return (
         <div className={styles.listContainer + " " + styles.produtorListStyle}>
-                <div className={styles.leftCornerListHead + " " + styles.produtorCornerHead + " centeredFlex"}>Produtor</div>
-                <div className={styles.rightCornerListHead  + " " + styles.produtorCornerHead + " centeredFlex"}>CPF</div>
+                
+                <div className={styles.leftCornerListHead + " " + styles.produtorCornerHead + " centeredFlex"}>
+                    Produtor
+                </div>
+                
+                <div className={styles.rightCornerListHead  + " " + styles.produtorCornerHead + " centeredFlex"}>
+                    CPF
+                </div>
+                
                 {mapedOutput}
         </div>
     )
+}
+
+ListProdutores.propTypes = {
+    dataArray: PropTypes.array
 }
 
 export default ListProdutores

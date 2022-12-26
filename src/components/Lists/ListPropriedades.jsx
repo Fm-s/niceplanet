@@ -1,8 +1,8 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 import styles from './list-styles.module.css'
 
-const ListPropriedades = () => {
-    const dataArray = [['Fazendo Grupo Terra Viva','PAkinbdgbvksjb254656263'],['Princesa do Reino','PAdqkwlehq1231nl231234123']]
+const ListPropriedades = ({dataArray}) => {
     
     let mapedOutput;
     
@@ -12,10 +12,10 @@ const ListPropriedades = () => {
         
         mapedOutput = dataArray.map(val => {
             return (
-            <>           
-                <div className={listCellStyle}>{val[0]}</div>
-                <div className={listCellStyle}>{val[1]}</div>
-            </>
+            <React.Fragment key={"propriedade_"+ val.idPropriedade}>           
+                <div className={listCellStyle}>{val.nomePropriedade}</div>
+                <div className={listCellStyle}>{val.numeroCadastroRural}</div>
+            </React.Fragment>
             )
         })
     }else {
@@ -28,6 +28,10 @@ const ListPropriedades = () => {
                 {mapedOutput}
         </div>
     )
+}
+
+ListPropriedades.propTypes = {
+    dataArray: PropTypes.array,
 }
 
 export default ListPropriedades

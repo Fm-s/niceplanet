@@ -5,9 +5,9 @@ import niceplanetLogo from '../../assets/imgs/niceplanet-logo.svg'
 const SimpleFooter = () => {
     const style = {
         width: "100%",
+        padding: "10px 0",
+        marginTop: "30px",
         boxSizing: "border-box",
-        padding: "50px",
-        marginTop: "50px",
         backgroundColor: "#228C22",
         display: "flex",
         flexDirection: "column",
@@ -15,8 +15,7 @@ const SimpleFooter = () => {
     }
     return (
         <div style={style}>
-            <img src={niceplanetLogo} alt="Footer logo"/>
-            <span style={{color:"#fff"}}>© Copyright 2009-2022</span>
+            <img style={{maxWidth: "200px"}} src={niceplanetLogo} alt="Footer logo"/>
         </div>
     )
 }
