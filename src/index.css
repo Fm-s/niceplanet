@@ -6,6 +6,10 @@
   --mobile-menu-height: 60px;
 }
 
+* {
+  cursor: default;
+}
+
 html, body {
   margin: 0;
   -webkit-font-smoothing: antialiased;

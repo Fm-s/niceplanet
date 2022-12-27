@@ -6,6 +6,7 @@ import ResponsiveHeader from "../../components/ResponsiveHeader/ResponviseHeader
 import SimpleFooter from "../../components/SimpleFooter/SimpleFooter";
 import Spinner from "../../components/Spinner/Spinner";
 import dataService from "../../services/dataService";
+import Modal from "../../components/Modal/Modal";
 import styles from "./main-page.module.css";
 
 const MainPage = () => {
@@ -16,6 +17,8 @@ const MainPage = () => {
     const [produtoresDataArray,setProdutoresDataArray] = useState([])
     const [propriedadesDataArray,setPropriedadesDataArray] = useState([])
     const [monitoramentoDataArray,setMonitoramentoDataArray] = useState([])
+
+    const [showModal,setShowModal] = useState(false);
 
     useEffect(()=>{
     
@@ -46,13 +49,20 @@ const MainPage = () => {
 
     },[])
 
+    const modalCtrl = (data) => {
+        setShowModal(<Modal closeFn={()=>{setShowModal(false)}} >{data.movementX}</Modal>)
+
+    }
+
+
     return (
         <>
             <ResponsiveHeader />
+            {showModal}
             <div className={styles.main + " grid"}>
                 <div className="col-xs-12 col-sm-12 col-lg-6">
                     {isProdutoresLoading && <Spinner size="90px" />}
-                    {!isProdutoresLoading && <ListProdutores dataArray={produtoresDataArray} />}
+                    {!isProdutoresLoading && <ListProdutores modalFn={modalCtrl} dataArray={produtoresDataArray} />}
                 </div>
                 <div className="col-xs-12 col-sm-12 col-lg-6">
                     {isPropriedadesLoading && <Spinner size="90px" />}
@@ -63,6 +73,7 @@ const MainPage = () => {
                     {!isMonitoramentoLoading && <ListMonitoramento dataArray={monitoramentoDataArray} />}
                 </div>
             </div>
+            <button onClick={modalCtrl}>text</button>
             <SimpleFooter/>
         </>
     );

@@ -64,6 +64,12 @@
     border: 1px solid #A8ACA1;
     border-bottom: 2px solid #A8ACA1;
     border-top: 0;
+    cursor: pointer;
+}
+
+.produtorListCell:hover, .produtorListCell:nth-child(2n-1):hover + div{
+    background-color: #C02421;
+    transform: scale(1.05);
 }
 
 /* ### LISTA PROPRIEDADE ### */
@@ -85,10 +91,16 @@
     border: 1px solid #009946;
     border-bottom: 2px solid #009946;
     border-top: 0;
+    cursor: pointer;
 }
 
 .propriedadeListCell:nth-child(2n){
     word-break: break-all;
+}
+
+.propriedadeListCell:hover, .propriedadeListCell:nth-child(2n-1):hover + div{
+    background-color: #C02421;
+    transform: scale(1.02);
 }
 
 /* ### LISTA MONITORAMENTO ### */
@@ -117,6 +129,10 @@
     box-sizing: border-box;
     padding: 5px;
     border-top: 2px solid #FF8383;
+}
+
+.monitoramentoListEntry:hover, .monitoramentoListEntry:hover + div, .monitoramentoDescription:hover{
+    text-shadow: 1px 1px 1px black;
 }
 
 .labelMonitoramento{

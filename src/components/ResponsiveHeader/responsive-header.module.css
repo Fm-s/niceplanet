@@ -110,7 +110,7 @@
     box-sizing: border-box;
     /* border-right: 1px solid darkblue; */
     transform: rotateZ(90deg) translateX(-86px);
-    transition: all linear 350ms;
+    transition: all linear 500ms;
     
     /* 1/2 menuCircle width */
     width: calc(var(--circle-width)/2);
@@ -132,11 +132,19 @@
 
 .mobileMenu .menuCircle{
     background-color: var(--menu-background-color);
+    background-image: url("../../../public/assets/imgs/globe.svg");
+    background-position: center;
+    background-size: contain;
     border: 1px solid darkblue;
     box-sizing: border-box;
     border-radius: 50%;
     height: var(--circle-width);
     width: var(--circle-width);
+    transition: all ease-in-out 500ms;
+}
+
+.mobileMenu.open .menuCircle {
+    transform: rotateZ(-260deg);
 }
 
 
