@@ -78,7 +78,7 @@ const MainPage = () => {
                     {isPropriedadesLoading && <Spinner size="90px" />}
                     {!isPropriedadesLoading && <ListPropriedades onClickFn={modalCtrl} dataArray={propriedadesDataArray} />}
                 </div>
-                <div className="col-12">
+                <div className="col-xs-12 col-lg-6">
                     {isMonitoramentoLoading && <Spinner size="90px" />}
                     {!isMonitoramentoLoading && <ListMonitoramento onClickFn={modalCtrl} dataArray={monitoramentoDataArray} />}
                 </div>

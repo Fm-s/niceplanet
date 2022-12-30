@@ -20,7 +20,7 @@ const ListMonitoramento = ({dataArray, onClickFn}) => {
                     <div className={styles.valueMonitoramento}>{val.analista}</div>
                 </div>
                 <div className={styles.monitoramentoDescription}>
-                    {val.parecerAnalise}
+                    {val.resultado}
                     <span className={styles.monitoramentoDescriptionLabel}>Resultado:</span>
                 </div>
             </React.Fragment>

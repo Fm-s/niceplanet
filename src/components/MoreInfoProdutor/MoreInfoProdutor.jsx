@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types';
 import Spinner from '../Spinner/Spinner';
+import MoreInfoMonitoramento from '../MoreInfoMonitoramento/MoreInfoMonitoramento';
 
 const MoreInfoProdutor = ({produtorObj}) => {
     const [produtor,setProdutor] = useState()
@@ -19,13 +20,11 @@ const MoreInfoProdutor = ({produtorObj}) => {
         <div>
             <h3>Propriedades:</h3>
             {produtor.propriedades?.map(prop=>{
-                let monitorMap;
-                console.log(prop?.monitoramentos)
+                let monitorMap
                 if(prop?.monitoramentos?.length > 0){
                     monitorMap = prop.monitoramentos.map(mon=>{
-                        return <div key={mon.idMonitoramento}>
-                            <div>{mon.dataMonitoramento}</div>
-                        </div>
+                        return <div key={mon.idMonitoramento}><MoreInfoMonitoramento monitoramentoObj={mon} /></div>
+                        
                     })
                 }
                 return (

@@ -7,6 +7,7 @@ const Modal = ({closeFn, children}) => {
     return (
         <>
         <div onClick={closeFn} className={modalBackSizing + styles.modalBackdrop}></div>
+        <div className={styles.modalContainer}>
         <div className={styles.mobalPage}>
             <div className={styles.modalHeader}>
                 <div className={styles.headerLeft}>
@@ -19,6 +20,7 @@ const Modal = ({closeFn, children}) => {
             <div className={styles.modalFrame}>
                 {children}
             </div>
+        </div>
         </div>
         </>
     )

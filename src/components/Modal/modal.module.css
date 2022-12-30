@@ -9,18 +9,29 @@
     opacity: 0.5;
 }
 
-.mobalPage{
+.modalContainer{
+    width: 100%;
     position: fixed;
-    border-radius: 4px;
     z-index: 10;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    
+}
+
+.mobalPage{
+    margin-top: calc(var(--mobile-menu-height) + 3rem);
+    border-radius: 4px;
+    overflow: scroll;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: flex-start;
     width: fit-content;
-    left: 0px;
-    top: calc(100vh / 2);
+    max-width: 95vw;
     min-width: 360px;
+    max-height: 80vh;
     background-color: #F3F3EE;
     box-shadow: -3px 10px 11px 0 rgba(0, 0, 0, 0.2), inset 1px 0 3px 0 rgba(255, 255, 255, 0.5);
 }
@@ -55,5 +66,8 @@
     .modalBackdrop{
         top: calc(var(--mobile-menu-height ) + 20px);
         height: calc(100vh - var(--mobile-menu-height) - 20px);
+    }
+    .mobalPage{
+        margin-top: calc(var(--mobile-menu-height) + 3rem + 20px);
     }
 }

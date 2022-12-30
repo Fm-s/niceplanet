@@ -1,0 +1,29 @@
+.pageContainer {
+    font-family: "Open Sans", sans-serif;
+    text-align: center;
+  }
+  
+  .niceLogo {
+    height: 30vmin;
+  }
+  
+  .pageHeader {
+    background-color: #010c20;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(8px + 2vmin);
+    color: white;
+  }
+
+  .pageHeader p {
+    padding: 50px;
+  }
+  
+  .niceLink {
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+  }
