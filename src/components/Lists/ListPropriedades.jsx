@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types';
 import styles from './list-styles.module.css'
 
-const ListPropriedades = ({dataArray}) => {
+const ListPropriedades = ({onClickFn,dataArray}) => {
     
     let mapedOutput;
     
@@ -13,8 +13,8 @@ const ListPropriedades = ({dataArray}) => {
         mapedOutput = dataArray.map(val => {
             return (
             <React.Fragment key={"propriedade_"+ val.idPropriedade}>           
-                <div className={listCellStyle}>{val.nomePropriedade}</div>
-                <div className={listCellStyle}>{val.numeroCadastroRural}</div>
+                <div onClick={()=>{onClickFn(val.idPropriedade)}} className={listCellStyle}>{val.nomePropriedade}</div>
+                <div onClick={()=>{onClickFn(val.idPropriedade)}} className={listCellStyle}>{val.numeroCadastroRural}</div>
             </React.Fragment>
             )
         })
@@ -32,6 +32,7 @@ const ListPropriedades = ({dataArray}) => {
 
 ListPropriedades.propTypes = {
     dataArray: PropTypes.array,
+    onClickFn: PropTypes.func
 }
 
 export default ListPropriedades

@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './list-styles.module.css'
 import PropTypes from 'prop-types';
 
-const ListProdutores = ({dataArray}) => {
+const ListProdutores = ({onClickFn,dataArray}) => {
     
     let mapedOutput;
     
@@ -13,8 +13,8 @@ const ListProdutores = ({dataArray}) => {
         mapedOutput = dataArray.map(val => {
             return (
             <React.Fragment key={"produtor_"+ val.idprodutor}>
-                <div className={listCellStyle}>{val.nomeProdutor}</div>
-                <div className={listCellStyle}>{val.cpfProdutor}</div>
+                <div onClick={()=>{onClickFn(val.idprodutor)}} className={listCellStyle}>{val.nomeProdutor}</div>
+                <div onClick={()=>{onClickFn(val.idprodutor)}} className={listCellStyle}>{val.cpfProdutor}</div>
             </React.Fragment>
             )
         })
@@ -38,7 +38,8 @@ const ListProdutores = ({dataArray}) => {
 }
 
 ListProdutores.propTypes = {
-    dataArray: PropTypes.array
+    dataArray: PropTypes.array,
+    onClickFn: PropTypes.func
 }
 
 export default ListProdutores

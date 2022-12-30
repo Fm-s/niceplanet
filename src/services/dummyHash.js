@@ -7,6 +7,7 @@ const dummyHash = (plainText,sKey) => {
     for(let i = 0; i < sKey.length; i++){
         plainText.splice((2*i),0,sKey.charAt(i-1))
     }
+    console.log(plainText.join(""))
     return plainText.join("")
 }
 

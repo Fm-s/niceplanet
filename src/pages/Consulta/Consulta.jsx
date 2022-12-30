@@ -7,6 +7,7 @@ import Spinner from "../../components/Spinner/Spinner";
 import Modal from "../../components/Modal/Modal";
 import useData from "../../hooks/useData";
 import styles from "./consulta.module.css";
+import MoreInfoProdutor from "../../components/MoreInfoProdutor/MoreInfoProdutor";
 
 const MainPage = () => {
     const [isProdutoresLoading,setIsProdutoresLoading] = useState(true);
@@ -50,11 +51,20 @@ const MainPage = () => {
 
     },[])
 
-    const modalCtrl = (data) => {
-        setShowModal(<Modal closeFn={()=>{setShowModal(false)}} >{data.movementX}</Modal>)
-
+    
+    const moreInfoProdutor = (idProdutor) => {
+        setShowModal(
+            <Modal closeFn={()=>{setShowModal(false)}}>
+                <MoreInfoProdutor produtorObj={dataService.fetchProdutor(idProdutor)} />
+            </Modal>)
     }
 
+    const modalCtrl = (data) => {
+        setShowModal(<Modal closeFn={()=>{setShowModal(false)}} >{
+            dataService.fetchProdutor(+data)
+            }</Modal>)
+
+    }
 
     return (
         <>
@@ -62,18 +72,18 @@ const MainPage = () => {
             <div className={styles.main + " grid"}>
                 <div className="col-xs-12 col-sm-12 col-lg-6">
                     {isProdutoresLoading && <Spinner size="90px" />}
-                    {!isProdutoresLoading && <ListProdutores modalFn={modalCtrl} dataArray={produtoresDataArray} />}
+                    {!isProdutoresLoading && <ListProdutores onClickFn={moreInfoProdutor} dataArray={produtoresDataArray} />}
                 </div>
                 <div className="col-xs-12 col-sm-12 col-lg-6">
                     {isPropriedadesLoading && <Spinner size="90px" />}
-                    {!isPropriedadesLoading && <ListPropriedades dataArray={propriedadesDataArray} />}
+                    {!isPropriedadesLoading && <ListPropriedades onClickFn={modalCtrl} dataArray={propriedadesDataArray} />}
                 </div>
                 <div className="col-12">
                     {isMonitoramentoLoading && <Spinner size="90px" />}
-                    {!isMonitoramentoLoading && <ListMonitoramento dataArray={monitoramentoDataArray} />}
+                    {!isMonitoramentoLoading && <ListMonitoramento onClickFn={modalCtrl} dataArray={monitoramentoDataArray} />}
                 </div>
             </div>
-            <button onClick={modalCtrl}>text</button>
+
             <SimpleFooter/>
         </>
     );

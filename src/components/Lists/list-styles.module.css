@@ -69,7 +69,6 @@
 
 .produtorListCell:hover, .produtorListCell:nth-child(2n-1):hover + div{
     background-color: #C02421;
-    transform: scale(1.05);
 }
 
 /* ### LISTA PROPRIEDADE ### */
@@ -100,7 +99,6 @@
 
 .propriedadeListCell:hover, .propriedadeListCell:nth-child(2n-1):hover + div{
     background-color: #C02421;
-    transform: scale(1.02);
 }
 
 /* ### LISTA MONITORAMENTO ### */
@@ -129,10 +127,11 @@
     box-sizing: border-box;
     padding: 5px;
     border-top: 2px solid #FF8383;
+    cursor: pointer;
 }
 
 .monitoramentoListEntry:hover, .monitoramentoListEntry:hover + div, .monitoramentoDescription:hover{
-    text-shadow: 1px 1px 1px black;
+    cursor: pointer;
 }
 
 .labelMonitoramento{
@@ -149,6 +148,7 @@
     flex-grow: 1;
     max-width: 12rem;
     text-align: center;
+    cursor: pointer;
 }
 
 .monitoramentoDescription{

@@ -1,4 +1,4 @@
-import useAxios from "../hooks/useAxios";
+import useAxios from "../hooks/useAxios"
 
 const useData = () => {
     const axiosInstance = useAxios()
@@ -8,28 +8,37 @@ const useData = () => {
             .then((res) => {
                 const dataArr = [];
                 for (const keys in res.data) {
-                    dataArr.push({ ...res.data[keys] });
+                    dataArr.push({ ...res.data[keys] })
                 }
-                return dataArr;
+                return dataArr
             });
     };
     
     const fetchListProdutores = () => {
-        return fetchListByEndPoint("produtores");
-    };
+        return fetchListByEndPoint("produtores")
+    }
     
     const fetchListPropriedades = () => {
-        return fetchListByEndPoint("propriedades");
-    };
+        return fetchListByEndPoint("propriedades")
+    }
     
     const fetchListMonitoramentos = () => {
-        return fetchListByEndPoint("monitoramentos");
-    };
+        return fetchListByEndPoint("monitoramentos")
+    }
+
+    const fetchProdutor = (idProdutor) => {
+        if(idProdutor){
+            return axiosInstance.get("produtor/" + idProdutor).then( el => el.data)
+        }
+        return Promise.resolve(null)
+    }
 
     return {
     fetchListProdutores: fetchListProdutores,
     fetchListPropriedades: fetchListPropriedades,
-    fetchListMonitoramentos: fetchListMonitoramentos}
+    fetchListMonitoramentos: fetchListMonitoramentos,
+    fetchProdutor: fetchProdutor
+    }
 };
 
-export default useData;
+export default useData

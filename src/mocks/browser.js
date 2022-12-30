@@ -1,9 +1,13 @@
 import { setupWorker, rest } from 'msw'
 import fakeResponse from './processo-seletivo-front.json'
 
+const dummyToken = "123dummytoken321"
+
 const dummyAuth = (user, password) => {
     const users = ['Felipe'];
-    const passwords = ['|nqi{cezpnlya|net12'];
+    const passwords = ['@n?i>c@e?p>lanet12'];
+
+    console.log(user + " p " + password)
   
     const userIndex = users.findIndex((el) => el === user);
     if(userIndex !== -1) {
@@ -12,25 +16,26 @@ const dummyAuth = (user, password) => {
     return false;
 }
 
-const getAtributeById = (objProperty,searchProp,searchId) => {
+const getAtributesById = (objProperty,searchProp,searchId) => {
+    const atributeArray = []
     for (const keys in fakeResponse[objProperty]) {
-        if(fakeResponse[keys][searchProp] == searchId){
-            return {key: keys, ... fakeResponse[keys]}
+        if(fakeResponse[objProperty][keys][searchProp] == searchId){
+            atributeArray.push(fakeResponse[objProperty][keys])
         }
     }
-    return null
+    if(atributeArray.length > 0) return atributeArray
 }
 
 const getMonitoramentoById = (id) => {
-    return getAtributeById("monitoramentos","idMonitoramento",id)
+    if(id) return getAtributesById("monitoramentos","idMonitoramento",id)
 }
 
 const getPropriedadeById = (id) => {
-    return getAtributeById("propriedades","idPropriedade",id)
+    if(id) return getAtributesById("propriedades","idPropriedade",id)[0]
 }
 
 const getProdutorById = (id) => {
-    return getAtributeById("produtores","idprodutor",id)
+    if(id) return getAtributesById("produtores","idprodutor",id)[0]
 }
     
 const getAllMonitoramentos = () => {
@@ -43,26 +48,28 @@ const getAllPropriedades = () => {
 
 const getAllProdutores = () => {
     return fakeResponse.produtores
-}
-    
+}   
                     
 const handlers = [
-    rest.get("monitoramentos", (_,res,ctx) => {
+    rest.get("monitoramentos", (req,res,ctx) => {
+        if("Bearer " + dummyToken !== req.headers.get('Authorization')) return res(ctx.status(401))
         return res(ctx.json(getAllMonitoramentos()))
     }),
     rest.get("monitoramento/:id", (req,res,ctx) => {
+        if("Bearer " + dummyToken !== req.headers.get('Authorization')) return res(ctx.status(401))
         const { id } = req.params
         const monitoramento = getMonitoramentoById(id)
         if (monitoramento){
             return res(ctx.json(monitoramento))
-        } else {
+        } 
             return res(ctx.status(404))
-        }
     }),
-    rest.get("propriedades", (_,res,ctx) => {
+    rest.get("propriedades", (req,res,ctx) => {
+        if("Bearer " + dummyToken !== req.headers.get('Authorization')) return res(ctx.status(401))
         return res(ctx.json(getAllPropriedades()))
     }),
     rest.get("propriedade", (req,res,ctx) => {
+        if("Bearer " + dummyToken !== req.headers.get('Authorization')) return res(ctx.status(401))
         const propriedade = getPropriedadeById(req.url.searchParams.get("id"))
         if (propriedade){
             return res(ctx.json(propriedade))
@@ -70,21 +77,46 @@ const handlers = [
             return res(ctx.status(404))
         }
     }),
-    rest.get("produtores", (_,res,ctx) => {
+    rest.get("produtores", (req,res,ctx) => {
+        if("Bearer " + dummyToken !== req.headers.get('Authorization')) return res(ctx.status(401))
         return res(ctx.json(getAllProdutores()))
     }),
-    rest.get("produtor", (req,res,ctx) => {
-        const produtor = getProdutorById(req.url.searchParams.get("id"))
+    rest.get("produtor/:id", (req,res,ctx) => {
+        if("Bearer " + dummyToken !== req.headers.get('Authorization')) return res(ctx.status(401))
+        const { id } = req.params
+        
+        let produtor = getProdutorById(id)
+
         if (produtor){
+            const vinculo = getAtributesById("vinculo","idProdutor",id)
+            if(vinculo){
+                produtor = {vinculos: vinculo, ...produtor}
+                
+                const propriedades = []
+                
+                vinculo.forEach(element => {
+                    let entry = getPropriedadeById(element.idPropriedade)
+                    if(entry){
+                        const monitoramento = getAtributesById("monitoramentos","idVinculo",element.idVinculo)
+                        if(monitoramento){
+                            entry = {monitoramentos: monitoramento, ...entry}
+                        }
+                        propriedades.push(entry)
+                    }
+                })
+
+                if(propriedades.length > 0){
+                    produtor = {propriedades,...produtor}
+                }
+            }
             return res(ctx.json(produtor))
-        } else {
-            return res(ctx.status(404))
-        }
+        } 
+        return res(ctx.status(404))
     }),
     rest.post("login", (req,res,ctx) => {
         return (req.json().then((postData)=>{
             if(dummyAuth(postData.userName,postData.password)){
-                return res(ctx.json({userName:postData.userName, token:"123dummytoken321"}))
+                return res(ctx.json({userName:postData.userName, token:dummyToken}))
             }else{
                 return res(ctx.status(401))
             }

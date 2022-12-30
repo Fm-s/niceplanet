@@ -11,15 +11,16 @@
 
 .mobalPage{
     position: fixed;
+    border-radius: 4px;
     z-index: 10;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: flex-start;
     width: fit-content;
-    left: calc(100vw / 2);
+    left: 0px;
     top: calc(100vh / 2);
-    min-width: 300px;
+    min-width: 360px;
     background-color: #F3F3EE;
     box-shadow: -3px 10px 11px 0 rgba(0, 0, 0, 0.2), inset 1px 0 3px 0 rgba(255, 255, 255, 0.5);
 }

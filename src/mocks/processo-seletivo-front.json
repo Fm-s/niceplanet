@@ -137,31 +137,37 @@
    "0":{
      "idVinculo": "1",
      "idProdutor": "1",
+     "idPropriedade": "5",
      "tipoVinculoProdutor": "proprietario"
    },
    "1":{
      "idVinculo": "null",
      "idProdutor": "2",
+     "idPropriedade": "4",
      "tipoVinculoProdutor": "null"
    },
    "2":{
      "idVinculo": "2",
      "idProdutor": "3",
+     "idPropriedade": "3",
      "tipoVinculoProdutor": "socio"
    },
    "3":{
      "idVinculo": "3",
      "idProdutor": "4",
+     "idPropriedade": "2",
      "tipoVinculoProdutor": "proprietario"
    },
    "4":{
      "idVinculo": "4",
      "idProdutor": "5",
+     "idPropriedade": "1",
      "tipoVinculoProdutor": "null"
    },
    "5":{
      "idVinculo": "5",
      "idProdutor": "6",
+     "idPropriedade": "0",
      "tipoVinculoProdutor": "proprietario"
    }
    }

@@ -46,10 +46,7 @@ const ResponsiveHeader = () => {
     } else {
         menuItens.push({
             name: "Login",
-            action: () =>
-                onMenuClick(() => {
-                    onMenuClick(()=>{navFn("Login")})
-                }),
+            action: ()=>{onMenuClick(()=>{navFn("Login")})},
         });
     }
 

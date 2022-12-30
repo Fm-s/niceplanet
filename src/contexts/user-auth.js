@@ -51,11 +51,9 @@ export const UserAuthProvider = ({ children }) => {
                 setLogged(true)
               })
             
-            }else {
-              console.log(response.status)
             }
             
-            callbackFn()
+            callbackFn(response.status)
         })
     };
 
