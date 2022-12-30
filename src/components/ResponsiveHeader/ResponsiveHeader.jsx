@@ -36,19 +36,19 @@ const ResponsiveHeader = () => {
 
     window.addEventListener("resize", headerResize);
 
-    const menuItens = [{ name: "Inicio", action: () => onMenuClick(navFn) }];
+    const menuItens = [{ name: "Inicio", action: () => onMenuClick(()=>{navFn("Inicio")})}];
 
     if (usrAuthCtx.logged()) {
         menuItens.push(
-            { name: "Consulta", action: () => onMenuClick(navFn) },
-            { name: "Logout", action: () => onMenuClick(usrAuthCtx.logout) }
+            { name: "Consulta", action: () => onMenuClick(()=>navFn("Consulta")) },
+            { name: "Logout", action: () => onMenuClick(()=>usrAuthCtx.logout(()=>{navFn("Inicio")})) }
         );
     } else {
         menuItens.push({
             name: "Login",
             action: () =>
                 onMenuClick(() => {
-                    usrAuthCtx.login("Felipe", "olamundo", () => {});
+                    onMenuClick(()=>{navFn("Login")})
                 }),
         });
     }

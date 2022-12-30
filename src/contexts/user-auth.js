@@ -59,12 +59,13 @@ export const UserAuthProvider = ({ children }) => {
         })
     };
 
-    const logout = () => {
+    const logout = (callbackFn) => {
       setLogged(false)
       setUser(null)
       setToken("")
       localStorage.clear("userName")
       localStorage.clear("AuthToken")
+      callbackFn()
     }
 
     return (
