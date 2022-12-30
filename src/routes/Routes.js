@@ -1,22 +1,18 @@
-import React from 'react'
 import NotFound from '../components/NotFound/NotFound';
 import MainPage from '../pages/MainPage/MainPage';
+import LandingPage from '../pages/LandingPage/LandingPage';
 
-export let Outlet = <MainPage />;
 
 export const Routes = (nPath) => {
     switch (nPath){
         case "Inicio":
-            Outlet = ""
-        break
-        
+            return LandingPage
         case "Consulta":
-            Outlet = MainPage
-        break
+            return MainPage
         case "Login":
             break
         default:
-            Outlet = NotFound
+            return NotFound
     }
 
 }

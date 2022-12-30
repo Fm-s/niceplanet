@@ -4,8 +4,8 @@ import ListProdutores from "../../components/Lists/ListProdutores";
 import ListPropriedades from "../../components/Lists/ListPropriedades";
 import SimpleFooter from "../../components/SimpleFooter/SimpleFooter";
 import Spinner from "../../components/Spinner/Spinner";
-import dataService from "../../services/dataService";
 import Modal from "../../components/Modal/Modal";
+import useData from "../../hooks/useData";
 import styles from "./main-page.module.css";
 
 const MainPage = () => {
@@ -18,6 +18,8 @@ const MainPage = () => {
     const [monitoramentoDataArray,setMonitoramentoDataArray] = useState([])
 
     const [showModal,setShowModal] = useState(false);
+
+    const dataService = useData()
 
     useEffect(()=>{
     

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import SimpleNavigation from "../../contexts/navigation-context";
 import UserAuth from "../../contexts/user-auth";
 import styles from "./responsive-header.module.css";
@@ -17,6 +17,11 @@ const ResponsiveHeader = () => {
     const currentPath = navCtx.currentPath
     const navFn = navCtx.navigatePath
 
+
+    useEffect(()=>{
+        usrAuthCtx.checkLogged()
+    },[])
+
     const mobileMenuToggle = () => {
         setMenuToggle(!menuToggle);
     };
@@ -26,14 +31,19 @@ const ResponsiveHeader = () => {
         setIsMobile(window.innerWidth < 991);
     };
 
+    const onMenuClick = (callFn) => {
+        setMenuToggle(false);
+        callFn()
+    }
+
     window.addEventListener("resize", headerResize);
 
-    const menuItens = [{name:"Inicio", action:navFn}]
-    
-    if (usrAuthCtx.logged){
-        menuItens.push({name:"Consulta",action:navFn},{name:"Logout",action:() => {usrAuthCtx.setLogged(false)}})
+    const menuItens = [{name:"Inicio", action:()=>onMenuClick(navFn)}]
+
+    if (usrAuthCtx.logged()){
+        menuItens.push({name:"Consulta",action:()=>onMenuClick(navFn)},{name:"Logout",action: ()=>onMenuClick(usrAuthCtx.logout)})
     } else {
-        menuItens.push({name:"Login",action:navFn})
+       menuItens.push({name:"Login", action:()=>onMenuClick(()=>{usrAuthCtx.login("Felipe","olamundo",()=>{})})})
     }
 
     return (

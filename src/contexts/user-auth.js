@@ -7,8 +7,8 @@ const UserAuth = React.createContext({
     user: null,
     logged: ()=>Boolean,
     token: null,
-    login: (usr, pass, callback) => {
-        usr, pass, callback;
+    login: (usr, pass, callbackFn) => {
+        usr, pass, callbackFn;
     },
     logout: () => {},
 });
@@ -18,21 +18,23 @@ export const UserAuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [token, setToken] = useState("");
 
-
-    const isLogged = () => {
+    const checkLogged = () => {
       const AuthToken = localStorage.getItem("AuthToken")
       if(!logged && AuthToken){
         setToken(AuthToken)
         setUser(localStorage.getItem("userName"))
         setLogged(true)
       }
+    }
+
+    const isLogged = () => {
       return logged
     }
 
-    const login = (usr, pass, callback) => {
+    const login = (usr, pass, callbackFn) => {
         pass = dummyHash(pass,"niceplanet123")
 
-        fetch("/login", {
+        fetch("/niceplanet/login", {
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",
@@ -40,20 +42,21 @@ export const UserAuthProvider = ({ children }) => {
             method: "POST",
             body: JSON.stringify({ userName: usr, password: pass }),
         }).then((response) => {
-            response
-                .json()
-                .then((res) => {
-                    if (res.loggedUser) {
-                        setLogged(true);
-                        setUser(res.loggedUser);
-                    } else {
-                        callback({ status: true, errMsg: res.ErrMsg });
-                    }
-                })
-                .catch((err) => {
-                    callback({ status: true, errMsg: err.message });
-                });
-        });
+            if(response.status === 200){
+              response.json().then(res=>{
+                localStorage.setItem("userName",res.userName)
+                localStorage.setItem("AuthToken",res.token)
+                setToken(res.token)
+                setUser(res.userName)
+                setLogged(true)
+              })
+            
+            }else {
+              console.log(response.status)
+            }
+            
+            callbackFn()
+        })
     };
 
     const logout = () => {
@@ -71,7 +74,8 @@ export const UserAuthProvider = ({ children }) => {
                 logged: isLogged,
                 token: token,
                 login: login,
-                logout: logout
+                logout: logout,
+                checkLogged: checkLogged
             }}
         >
             {children}
@@ -80,7 +84,7 @@ export const UserAuthProvider = ({ children }) => {
 };
 
 UserAuthProvider.propTypes = {
-    children: PropTypes.node,
+    children: PropTypes.any
 };
 
 export default UserAuth;
