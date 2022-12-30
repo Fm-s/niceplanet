@@ -1,5 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import {UserAuthProvider} from './contexts/user-auth';
+import {SimpleNavProvider} from './contexts/navigation-context';
+
 import './index.css';
 import App from './App';
 
@@ -25,7 +28,11 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
   root.render(
     <React.StrictMode>
-        <App/>
+      <UserAuthProvider>
+        <SimpleNavProvider>
+          <App/>
+        </SimpleNavProvider>
+      </UserAuthProvider>
     </React.StrictMode>
   );
 }

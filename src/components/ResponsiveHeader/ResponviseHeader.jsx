@@ -1,12 +1,21 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import SimpleNavigation from "../../contexts/navigation-context";
+import UserAuth from "../../contexts/user-auth";
 import styles from "./responsive-header.module.css";
 import smgeoSvg from "../../assets/imgs/smgeo-consulta.svg";
 import niceplanetMobileSvg from "../../assets/imgs/niceplanet-globe.svg";
 import niceplanetSvg from "../../assets/imgs/niceplanet-logo.svg";
+import BurgerMenu from "../BurguerMenu/BurguerMenu";
 
 const ResponsiveHeader = () => {
     const [menuToggle, setMenuToggle] = useState(false);
     const [isMobile, setIsMobile] = useState(window.innerWidth < 991);
+
+    const usrAuthCtx = useContext(UserAuth)
+
+    const navCtx = useContext(SimpleNavigation)
+    const currentPath = navCtx.currentPath
+    const navFn = navCtx.navigatePath
 
     const mobileMenuToggle = () => {
         setMenuToggle(!menuToggle);
@@ -19,6 +28,14 @@ const ResponsiveHeader = () => {
 
     window.addEventListener("resize", headerResize);
 
+    const menuItens = [{name:"Inicio", action:navFn}]
+    
+    if (usrAuthCtx.logged){
+        menuItens.push({name:"Consulta",action:navFn},{name:"Logout",action:() => {usrAuthCtx.setLogged(false)}})
+    } else {
+        menuItens.push({name:"Login",action:navFn})
+    }
+
     return (
         <>
             <div className={styles.header}>
@@ -26,7 +43,7 @@ const ResponsiveHeader = () => {
                     <img src={smgeoSvg} alt="smgeo consulta" />
                 </div>
                 <div className={styles.logoBox}>
-                    <a href="niceplanet.com">
+                    <a target="_blank" href="niceplanet.com">
                         {isMobile && (
                             <img src={niceplanetMobileSvg} alt="Nice Planet" />
                         )}
@@ -41,17 +58,11 @@ const ResponsiveHeader = () => {
                         className={styles.logoBox + " " + styles.flexRight}
                         onClick={mobileMenuToggle}
                     >
-                        <div className={styles.burgerMenu}>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
+                        <BurgerMenu toggled={menuToggle} />
                     </div>
                 )}
 
-                {!isMobile && (
-                    <div>menu itens</div>
-                )}
+                {!isMobile && menuItens.map((el,index)=><div className={currentPath === el.name ? styles.selected : ""} key={index} onClick={()=>{el.action(el.name)}}>{el.name}</div>)}
 
             </div>
             {isMobile && (
@@ -62,11 +73,7 @@ const ResponsiveHeader = () => {
                             : styles.mobileMenu
                     }
                 >
-                    <div>
-                        <div className={styles.menuCircle}></div>
-                    </div>
-                    <span>Home</span>
-                    <span>Voltar</span>
+                    {menuItens.map((el,index)=><span className={currentPath === el.name ? styles.selected : ""} key={index} onClick={()=>{el.action(el.name)}}>{el.name}</span>)}
                 </div>
             )}
         </>

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import ListMonitoramento from "../../components/Lists/ListMonitoramento";
 import ListProdutores from "../../components/Lists/ListProdutores";
 import ListPropriedades from "../../components/Lists/ListPropriedades";
-import ResponsiveHeader from "../../components/ResponsiveHeader/ResponviseHeader";
 import SimpleFooter from "../../components/SimpleFooter/SimpleFooter";
 import Spinner from "../../components/Spinner/Spinner";
 import dataService from "../../services/dataService";
@@ -57,7 +56,6 @@ const MainPage = () => {
 
     return (
         <>
-            <ResponsiveHeader />
             {showModal}
             <div className={styles.main + " grid"}>
                 <div className="col-xs-12 col-sm-12 col-lg-6">

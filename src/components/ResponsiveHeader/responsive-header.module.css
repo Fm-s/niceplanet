@@ -36,117 +36,38 @@
     justify-content: end;
 }
 
-.burgerMenu {
-    position: relative;
-    box-sizing: border-box;
-    width: 36px;
-    height: 27px;
-    border: 1px solid #979797;
-}
-
-.burgerMenu span {
-    position: absolute;
-    z-index: 9;
-    box-sizing: border-box;
-    width: 18px;
-    border-bottom: 1px solid #979797;
-    left: 8px;
-}
-
-.burgerMenu span:nth-child(1){
-    top:7px;
-}
-
-.burgerMenu span:nth-child(2){
-    top: 12px
-}
-
-.burgerMenu span:nth-child(3){
-    top: 17px
-}
-
 /* Mobile Menu */
 .mobileMenu {
-    --circle-height: 280px;
-    --circle-width: 280px;
     position: fixed;
+    top: -200px;
+    width: 100%;
+    right: 0;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    top: calc(var(--mobile-menu-height) + 0.5rem);
+    align-items: flex-end;
     gap: 1rem;
     z-index: 2;
-    /* Posição inicial 90 graus - metade do width + 30px */
-    
-    right: 10px;
+    transition: all ease-in-out 300ms;
+    background-color: var(--menu-background-color);
+}
+
+.mobileMenu.open{
+    top: var(--mobile-menu-height);
+    padding: 0 1.5rem 0.8rem 0rem;
+    border-top: 2px solid rgba(50, 50, 50, 0.2);
 }
 
 .mobileMenu span {
-    position: relative;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 1rem;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.mobileMenu span:hover, .mobileMenu span.active {
     color: #fff;
-    font-size: 1.85rem;
-    transition: transform linear 300ms, font-size cubic-bezier(0,0.5,0,0) 350ms;
 }
-
-.mobileMenu span:nth-child(2){
-    transition-delay: 80ms;
-    transform: rotateZ(90deg) translateX(-150px);
-}
-
-.mobileMenu span:nth-child(3){
-    transition-delay: 50ms;
-    transform: rotateZ(90deg) translateY(20px) translateX(-150px);
-}
-
-.mobileMenu.open span {
-    transform: rotateZ(0deg) translateX(0px) translateX(0px);
-    font-size: 2rem;
-}
-
-/*  ### Menu Circle ### */
-.mobileMenu > div {
-    overflow: hidden;
-    position: absolute;
-    box-sizing: border-box;
-    /* border-right: 1px solid darkblue; */
-    transform: rotateZ(90deg) translateX(-86px);
-    transition: all linear 500ms;
-    
-    /* 1/2 menuCircle width */
-    width: calc(var(--circle-width)/2);
-    
-    height: var(--circle-height);
-    
-    /* menos right do mobile menu */
-    right: -60px;
-    
-    /* menos top do mobile Menu - metade do circleHeight */
-    top: calc(-0.5rem - var(--circle-height)/2);
-    
-    background-color: transparent;
-}
-
-.mobileMenu.open > div {
-    transform: rotateZ(-90deg) translateX(-60px);
-}
-
-.mobileMenu .menuCircle{
-    background-color: var(--menu-background-color);
-    background-image: url("../../../public/assets/imgs/globe.svg");
-    background-position: center;
-    background-size: contain;
-    border: 1px solid darkblue;
-    box-sizing: border-box;
-    border-radius: 50%;
-    height: var(--circle-width);
-    width: var(--circle-width);
-    transition: all ease-in-out 500ms;
-}
-
-.mobileMenu.open .menuCircle {
-    transform: rotateZ(-260deg);
-}
-
 
 @media screen and (min-width: 576px) {
     
@@ -159,12 +80,11 @@
         height: calc(var(--mobile-menu-height) + 4px);
     }
     
-    .burgerMenu{
+    .flexRight > *{
         transform: scale(1.3);
     }
 
-    .mobileMenu{
-        top: calc(var(--mobile-menu-height) + 20px + 0.5rem);
-        right: 10px;
+    .mobileMenu.open{
+        top: calc(var(--mobile-menu-height) + 20px);
     }
 }
