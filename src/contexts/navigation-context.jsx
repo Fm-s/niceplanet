@@ -12,7 +12,7 @@ const SimpleNavigation = React.createContext({
   })
 
   export const SimpleNavProvider = ({ children }) => {
-    const [currentPath, setCurrentPath] = useState("inicio")
+    const [currentPath, setCurrentPath] = useState("Inicio")
     const [Outlet, setOutlet] = useState(<EntryPoint/>)
     
     const navigatePath = (nPath) => {

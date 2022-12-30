@@ -36,6 +36,26 @@
     justify-content: end;
 }
 
+.flexRight.wideMenu{
+    gap: 45px
+}
+
+.flexRight div {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 1rem;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.flexRight div:hover, .flexRight div.selected {
+    color: #fff;
+}
+
+.flexRight div.selected {
+    cursor: default;
+}
+
 /* Mobile Menu */
 .mobileMenu {
     position: fixed;
@@ -65,8 +85,12 @@
     cursor: pointer;
 }
 
-.mobileMenu span:hover, .mobileMenu span.active {
+.mobileMenu span:hover, .mobileMenu span.selected {
     color: #fff;
+}
+
+.mobileMenu span.selected {
+    cursor: default;
 }
 
 @media screen and (min-width: 576px) {

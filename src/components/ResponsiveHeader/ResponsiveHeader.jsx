@@ -11,16 +11,14 @@ const ResponsiveHeader = () => {
     const [menuToggle, setMenuToggle] = useState(false);
     const [isMobile, setIsMobile] = useState(window.innerWidth < 991);
 
-    const usrAuthCtx = useContext(UserAuth)
+    const usrAuthCtx = useContext(UserAuth);
 
-    const navCtx = useContext(SimpleNavigation)
-    const currentPath = navCtx.currentPath
-    const navFn = navCtx.navigatePath
+    const navCtx = useContext(SimpleNavigation);
+    const navFn = navCtx.navigatePath;
 
-
-    useEffect(()=>{
-        usrAuthCtx.checkLogged()
-    },[])
+    useEffect(() => {
+        usrAuthCtx.checkLogged();
+    }, []);
 
     const mobileMenuToggle = () => {
         setMenuToggle(!menuToggle);
@@ -33,17 +31,26 @@ const ResponsiveHeader = () => {
 
     const onMenuClick = (callFn) => {
         setMenuToggle(false);
-        callFn()
-    }
+        callFn();
+    };
 
     window.addEventListener("resize", headerResize);
 
-    const menuItens = [{name:"Inicio", action:()=>onMenuClick(navFn)}]
+    const menuItens = [{ name: "Inicio", action: () => onMenuClick(navFn) }];
 
-    if (usrAuthCtx.logged()){
-        menuItens.push({name:"Consulta",action:()=>onMenuClick(navFn)},{name:"Logout",action: ()=>onMenuClick(usrAuthCtx.logout)})
+    if (usrAuthCtx.logged()) {
+        menuItens.push(
+            { name: "Consulta", action: () => onMenuClick(navFn) },
+            { name: "Logout", action: () => onMenuClick(usrAuthCtx.logout) }
+        );
     } else {
-       menuItens.push({name:"Login", action:()=>onMenuClick(()=>{usrAuthCtx.login("Felipe","olamundo",()=>{})})})
+        menuItens.push({
+            name: "Login",
+            action: () =>
+                onMenuClick(() => {
+                    usrAuthCtx.login("Felipe", "olamundo", () => {});
+                }),
+        });
     }
 
     return (
@@ -72,8 +79,21 @@ const ResponsiveHeader = () => {
                     </div>
                 )}
 
-                {!isMobile && menuItens.map((el,index)=><div className={currentPath === el.name ? styles.selected : ""} key={index} onClick={()=>{el.action(el.name)}}>{el.name}</div>)}
-
+                {!isMobile && (
+                    <div className={styles.logoBox + " " + styles.flexRight + " " + styles.wideMenu}>
+                        {menuItens.map((el, index) => (
+                            <div className={
+                                    navCtx.currentPath === el.name
+                                        ? styles.selected
+                                        : ""
+                                }
+                                key={index} onClick={() => {el.action(el.name)}}
+                            >
+                                {el.name}
+                            </div>
+                        ))}
+                    </div>
+                )}
             </div>
             {isMobile && (
                 <div
@@ -83,7 +103,21 @@ const ResponsiveHeader = () => {
                             : styles.mobileMenu
                     }
                 >
-                    {menuItens.map((el,index)=><span className={currentPath === el.name ? styles.selected : ""} key={index} onClick={()=>{el.action(el.name)}}>{el.name}</span>)}
+                    {menuItens.map((el, index) => (
+                        <span
+                            className={
+                                navCtx.currentPath === el.name
+                                    ? styles.selected
+                                    : ""
+                            }
+                            key={index}
+                            onClick={() => {
+                                el.action(el.name);
+                            }}
+                        >
+                            {el.name}
+                        </span>
+                    ))}
                 </div>
             )}
         </>
