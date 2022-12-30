@@ -1,14 +1,15 @@
-import React from 'react'
-import ResponsiveHeader from "./components/ResponsiveHeader/ResponviseHeader";
-import MainPage from './pages/MainPage/MainPage';
-
+import React, { useContext } from 'react'
+import ResponsiveHeader from "./components/ResponsiveHeader/ResponsiveHeader";
+import SimpleNavigation from './contexts/navigation-context';
 import './App.css';
-// import { Outlet } from './routes/Routes';
+
+
 
 function App() {
+  const navCtx = useContext(SimpleNavigation)
   return <>
     <ResponsiveHeader />
-    <MainPage />
+    {navCtx.Outlet}
   </>
 }
 

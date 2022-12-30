@@ -6,7 +6,7 @@ import SimpleFooter from "../../components/SimpleFooter/SimpleFooter";
 import Spinner from "../../components/Spinner/Spinner";
 import Modal from "../../components/Modal/Modal";
 import useData from "../../hooks/useData";
-import styles from "./main-page.module.css";
+import styles from "./consulta.module.css";
 
 const MainPage = () => {
     const [isProdutoresLoading,setIsProdutoresLoading] = useState(true);
