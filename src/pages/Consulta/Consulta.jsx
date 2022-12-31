@@ -7,7 +7,9 @@ import Spinner from "../../components/Spinner/Spinner";
 import Modal from "../../components/Modal/Modal";
 import useData from "../../hooks/useData";
 import styles from "./consulta.module.css";
-import MoreInfoProdutor from "../../components/MoreInfoProdutor/MoreInfoProdutor";
+import MoreInfoProdutor from "../../components/MoreInfo/MoreInfoProdutor/MoreInfoProdutor";
+import MoreInfoPropriedade from "../../components/MoreInfo/MoreInfoPropriedade/MoreInfoPropriedade";
+import MoreInfoMonitoramento from "../../components/MoreInfo/MoreInfoMonitoramento/MoreInfoMonitoramento";
 
 const MainPage = () => {
     const [isProdutoresLoading,setIsProdutoresLoading] = useState(true);
@@ -54,16 +56,27 @@ const MainPage = () => {
     
     const moreInfoProdutor = (idProdutor) => {
         setShowModal(
-            <Modal closeFn={()=>{setShowModal(false)}}>
+            <Modal title="Produtor" closeFn={()=>{setShowModal(false)}}>
                 <MoreInfoProdutor produtorObj={dataService.fetchProdutor(idProdutor)} />
             </Modal>)
     }
 
-    const modalCtrl = (data) => {
-        setShowModal(<Modal closeFn={()=>{setShowModal(false)}} >{
-            dataService.fetchProdutor(+data)
-            }</Modal>)
+    const moreInfoPropriedade = (idPropriedade) => {
+        dataService.fetchPropriedade(idPropriedade).then(propriedade=>{
+            setShowModal(
+                <Modal title="Propriedade" closeFn={()=>{setShowModal(false)}} >{
+                    <MoreInfoPropriedade propriedadeObj={propriedade} /> 
+                }</Modal>)
+        })
+    }
 
+    const moreInfoMonitoramento = (idMonitoramento) => {
+        dataService.fetchMonitoramento(idMonitoramento).then(monitoramento=>{
+            setShowModal(
+                <Modal closeFn={()=>{setShowModal(false)}} >{
+                    <MoreInfoMonitoramento monitoramentoObj={monitoramento} /> 
+                }</Modal>)
+        })
     }
 
     return (
@@ -76,11 +89,11 @@ const MainPage = () => {
                 </div>
                 <div className="col-xs-12 col-sm-12 col-lg-6">
                     {isPropriedadesLoading && <Spinner size="90px" />}
-                    {!isPropriedadesLoading && <ListPropriedades onClickFn={modalCtrl} dataArray={propriedadesDataArray} />}
+                    {!isPropriedadesLoading && <ListPropriedades onClickFn={moreInfoPropriedade} dataArray={propriedadesDataArray} />}
                 </div>
                 <div className="col-xs-12 col-lg-6">
                     {isMonitoramentoLoading && <Spinner size="90px" />}
-                    {!isMonitoramentoLoading && <ListMonitoramento onClickFn={modalCtrl} dataArray={monitoramentoDataArray} />}
+                    {!isMonitoramentoLoading && <ListMonitoramento onClickFn={moreInfoMonitoramento} dataArray={monitoramentoDataArray} />}
                 </div>
             </div>
 

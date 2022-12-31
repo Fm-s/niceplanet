@@ -27,7 +27,7 @@ const getAtributesById = (objProperty,searchProp,searchId) => {
 }
 
 const getMonitoramentoById = (id) => {
-    if(id) return getAtributesById("monitoramentos","idMonitoramento",id)
+    if(id) return getAtributesById("monitoramentos","idMonitoramento",id)[0]
 }
 
 const getPropriedadeById = (id) => {
@@ -68,14 +68,29 @@ const handlers = [
         if("Bearer " + dummyToken !== req.headers.get('Authorization')) return res(ctx.status(401))
         return res(ctx.json(getAllPropriedades()))
     }),
-    rest.get("propriedade", (req,res,ctx) => {
+    rest.get("propriedade/:id", (req,res,ctx) => {
         if("Bearer " + dummyToken !== req.headers.get('Authorization')) return res(ctx.status(401))
-        const propriedade = getPropriedadeById(req.url.searchParams.get("id"))
+        const { id } = req.params
+        
+        let propriedade = getPropriedadeById(id)
+
         if (propriedade){
+            const vinculo = getAtributesById("vinculo","idPropriedade",id)
+            console.log(vinculo)
+            if(vinculo){
+                propriedade = {vinculos: vinculo, ...propriedade}
+
+                vinculo.forEach(el=>{
+                    const monitoramento = getAtributesById("monitoramentos","idVinculo",el.idVinculo)
+                        if(monitoramento){
+                            propriedade = {monitoramentos:monitoramento,...propriedade}
+                        }
+                })
+            }
+            console.log(propriedade)
             return res(ctx.json(propriedade))
-        } else {
-            return res(ctx.status(404))
-        }
+        } 
+        return res(ctx.status(404))
     }),
     rest.get("produtores", (req,res,ctx) => {
         if("Bearer " + dummyToken !== req.headers.get('Authorization')) return res(ctx.status(401))

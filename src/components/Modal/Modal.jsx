@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types';
 import styles from './modal.module.css'
 
-const Modal = ({closeFn, children}) => {
+const Modal = ({closeFn, children, title}) => {
     const modalBackSizing = styles.modalBackSizing + " "
     return (
         <>
@@ -11,7 +11,7 @@ const Modal = ({closeFn, children}) => {
         <div className={styles.mobalPage}>
             <div className={styles.modalHeader}>
                 <div className={styles.headerLeft}>
-                    <span className={styles.modalTitle}>Modal Title</span>
+                    <span className={styles.modalTitle}>{title}</span>
                 </div>
                 <div className={styles.headerRight}>
                     <button onClick={closeFn}>X</button>
@@ -28,7 +28,8 @@ const Modal = ({closeFn, children}) => {
 
 Modal.propTypes = {
     closeFn: PropTypes.func,
-    children: PropTypes.any
+    children: PropTypes.any,
+    title: PropTypes.string
 }
 
 export default Modal

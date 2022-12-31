@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styles from "./more-info-monitoramento.module.css";
-import magnifeirIco from '../../assets/imgs/magnifier.png'
+import magnifeirIco from '../../../assets/imgs/magnifier.png'
 
 const CollapseParecer = ({ value }) => {
     const [toggle, setToggle] = useState(true);

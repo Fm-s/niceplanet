@@ -33,11 +33,27 @@ const useData = () => {
         return Promise.resolve(null)
     }
 
+    const fetchPropriedade = (idPropriedade) => {
+        if(idPropriedade){
+            return axiosInstance.get("propriedade/" + idPropriedade).then( el => el.data)
+        }
+        return Promise.resolve(null)
+    }
+
+    const fetchMonitoramento = (idMonitoramento) => {
+        if(idMonitoramento){
+            return axiosInstance.get("monitoramento/" + idMonitoramento).then( el => el.data)
+        }
+        return Promise.resolve(null)
+    }
+
     return {
     fetchListProdutores: fetchListProdutores,
     fetchListPropriedades: fetchListPropriedades,
     fetchListMonitoramentos: fetchListMonitoramentos,
-    fetchProdutor: fetchProdutor
+    fetchProdutor: fetchProdutor,
+    fetchPropriedade: fetchPropriedade,
+    fetchMonitoramento: fetchMonitoramento
     }
 };
 
